@@ -1,4 +1,4 @@
-package chapter3;
+package producer_application;
 
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;

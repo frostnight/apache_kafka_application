@@ -1,15 +1,15 @@
-package chapter3;
-
-import java.util.Properties;
+package producer_application;
 
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.serialization.StringSerializer;
 
-public class ProducerWithKeyValue {
+import java.util.Properties;
 
-	private final static String TOPIC_NAME = "test";
+public class ProducerExactPartition {
+
+    private final static String TOPIC_NAME = "test";
 	private final static String BOOTSTRAP_SERVERS = "my-kafka:9092";
 
 	public static void main(String[] args){
@@ -21,10 +21,10 @@ public class ProducerWithKeyValue {
 
 		KafkaProducer<String, String> producer = new KafkaProducer<>(configs);
 
-		ProducerRecord<String, String> record = new ProducerRecord<>(TOPIC_NAME, "Pangyo", "Pangyo");
+        int partitionNo = 0;
+		ProducerRecord<String, String> record = new ProducerRecord<>(TOPIC_NAME, partitionNo, "Pangyo", "Pangyo");
 		producer.send(record);
-		ProducerRecord<String, String> record2 = new ProducerRecord<>(TOPIC_NAME, "Busan", "Busan");
-		producer.send(record2);
+
 		producer.flush();
 		producer.close();
 	}
